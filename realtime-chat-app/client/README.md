@@ -53,6 +53,9 @@ The application allows users to create accounts, log in securely, search for oth
 - VS Code
 - Git
 - thunder Client /Postman
-  
-- GitHub
-- Postman
+
+  # Live Demo
+
+*Frontend:* [Open Real-Time Chat App]        https://real-time-chat-app-a8dz.onrender.com/
+
+*Backend:* [View Backend API]                https://real-time-chat-app-epob.vercel.app/
