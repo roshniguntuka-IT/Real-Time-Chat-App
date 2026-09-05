@@ -1,16 +1,58 @@
-# React + Vite
+#  Real-Time Chat & Collaboration Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack real-time chat application built using React, Node.js, Express, MongoDB, Socket.IO, and JWT authentication.
 
-Currently, two official plugins are available:
+The application allows users to create accounts, log in securely, search for other users, start conversations, and exchange messages in real time.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Features
 
-## Expanding the ESLint configuration
+- User Registration
+- Secure User Login
+- JWT Authentication
+- Password Hashing using bcrypt
+- User Search
+- Online / Offline User Status
+- One-to-One Conversations
+- Real-Time Messaging
+- Message Persistence using MongoDB
+- Conversation History
+- Chat Menu
+- Clear Chat UI
+- Responsive Chat Interface
+- Socket.IO Real-Time Communication
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+# Technologies Used
+
+## Frontend
+
+- React.js
+- Vite
+- JavaScript
+- CSS
+- Socket.IO Client
+
+## Backend
+
+- Node.js
+- Express.js
+- Socket.IO
+- JWT
+- bcryptjs
+
+## Database
+
+- MongoDB Atlas
+- Mongoose
+
+## Development Tools
+
+- VS Code
+- Git
+- thunder Client /Postman
+  
+- GitHub
+- Postman
