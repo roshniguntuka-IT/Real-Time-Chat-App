@@ -16,6 +16,9 @@ function App() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [conversation, setConversation] = useState(null);
 
+  
+  const [mobileView, setMobileView] = useState("list");
+
   // Socket.IO connection
   useEffect(() => {
     if (!user) {
@@ -23,15 +26,8 @@ function App() {
     }
 
     const sendOnlineStatus = () => {
-      console.log(
-        "Connected to Socket.IO:",
-        socket.id
-      );
-
-      console.log(
-        "Sending userOnline:",
-        user.id
-      );
+      console.log("Connected to Socket.IO:", socket.id);
+      console.log("Sending userOnline:", user.id);
 
       socket.emit("userOnline", user.id);
     };
@@ -53,7 +49,7 @@ function App() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-       `${import.meta.env.VITE_API_URL}/api/conversations`,
+        `${import.meta.env.VITE_API_URL}/api/conversations`,
         {
           method: "POST",
           headers: {
@@ -81,6 +77,9 @@ function App() {
         data.conversation._id
       );
 
+      // On mobile, open the chat screen
+      setMobileView("chat");
+
       console.log(
         "Conversation opened:",
         data.conversation._id
@@ -93,10 +92,11 @@ function App() {
     }
   };
 
+  // Select existing conversation
   const handleSelectConversation = (conversation) => {
     const otherUser = conversation.participants.find(
       (participant) =>
-        participant._id !== user.id
+        participant._id.toString() !== user.id.toString()
     );
 
     setSelectedUser(otherUser);
@@ -107,13 +107,21 @@ function App() {
       conversation._id
     );
 
+    // On mobile, open the chat screen
+    setMobileView("chat");
+
     console.log(
       "Conversation opened:",
       conversation._id
     );
   };
 
+  // Mobile back button
+  const handleBackToConversations = () => {
+    setMobileView("list");
+  };
 
+  // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -122,12 +130,12 @@ function App() {
     setSelectedUser(null);
     setConversation(null);
     setShowSignup(false);
+    setMobileView("list");
   };
-
 
   console.log("Current user:", user);
 
- 
+  // Login / Signup
   if (!user) {
     if (showSignup) {
       return (
@@ -162,11 +170,16 @@ function App() {
         </div>
       </header>
 
-     
       <main className="chat-container">
 
-        {/* Sidebar */}
-        <aside className="sidebar">
+        {/* Sidebar / Conversation List */}
+        <aside
+          className={`sidebar ${
+            mobileView === "chat"
+              ? "mobile-hidden"
+              : ""
+          }`}
+        >
 
           <div className="sidebar-section">
             <NewChat
@@ -184,12 +197,48 @@ function App() {
 
         </aside>
 
-       
-        <section className="chat-area">
+        {/* Chat Area */}
+        <section
+          className={`chat-area ${
+            mobileView === "list"
+              ? "mobile-hidden"
+              : ""
+          }`}
+        >
+
+          {/* Mobile Back Button */}
+          <div className="mobile-chat-header">
+            <button
+              className="mobile-back-button"
+              onClick={handleBackToConversations}
+            >
+              ←
+            </button>
+
+            <div className="mobile-user-info">
+              <strong>
+                {selectedUser?.name || "Chat"}
+              </strong>
+
+              <span
+                className={
+                  selectedUser?.isOnline
+                    ? "mobile-online"
+                    : "mobile-offline"
+                }
+              >
+                {selectedUser?.isOnline
+                  ? "🟢 Online"
+                  : "⚫ Offline"}
+              </span>
+            </div>
+          </div>
+
           <Chat
             conversation={conversation}
             selectedUser={selectedUser}
           />
+
         </section>
 
       </main>
