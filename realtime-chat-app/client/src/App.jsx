@@ -53,7 +53,7 @@ function App() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/conversations",
+       `${import.meta.env.VITE_API_URL}/api/conversations`,
         {
           method: "POST",
           headers: {

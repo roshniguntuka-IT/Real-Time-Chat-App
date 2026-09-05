@@ -21,7 +21,7 @@ function Chat({ conversation, selectedUser }) {
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-          `http://localhost:5000/api/messages/${conversation._id}`,
+         `${import.meta.env.VITE_API_URL}/api/messages/${conversation._id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ function Chat({ conversation, selectedUser }) {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/messages",
+        `${import.meta.env.VITE_API_URL}/api/messages`,
         {
           method: "POST",
           headers: {
